@@ -42,6 +42,7 @@ void lock_pairs(void);
 void print_winner(void);
 bool check_cycle(int n, int m);
     
+
 int main(int argc, string argv[])
 {
     // Check for invalid usage
@@ -85,16 +86,13 @@ int main(int argc, string argv[])
         for (int j = 0; j < candidate_count; j++) // j == rank // looping through all candidates (ranks)
         {
             string name = get_string("Rank %i: ", j + 1);
-
             if (!vote(j, name, ranks))
             {
                 printf("Invalid vote.\n");
                 return 3;
             }
         }
-
         record_preferences(ranks); // called once for each voter
-
         printf("\n");
     }
 
@@ -164,7 +162,6 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
-    
     for (int k = 0; k < pair_count - 1; k++) // looping through all the passes
     {
         for (int n = 0; n < pair_count - 1; n++) // bubble sort // bubble the smallest margin to the end
@@ -186,14 +183,9 @@ void sort_pairs(void)
 }
 
 
-
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-
-    // lock the pairs into the candidate graph, as long as there is NO CYCLE
-
-    
     for (int i = 0; i < pair_count; i++)    
     {
         if (!check_cycle(pairs[i].winner, pairs[i].loser))
@@ -207,10 +199,9 @@ void lock_pairs(void)
 
 bool check_cycle(int w, int l) // w = initial pair's winner, l = initial pair's loser
 {
-    // base case (stops recursion)
+    // base case 
     if (locked[l][w] == true)
         return true;
-    
     
     // recursive case
     else
@@ -228,13 +219,11 @@ bool check_cycle(int w, int l) // w = initial pair's winner, l = initial pair's 
 }
 
 
-
 // Print the winner of the election
 void print_winner(void)
 {
     // print the source of the graph 
     // - the candidate who has no arrows pointed towards them 
-
 
     bool loser;
     for (int i = 0; i < candidate_count; i++)  // looping through rows
